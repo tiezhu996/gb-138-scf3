@@ -29,6 +29,7 @@ services:
     environment:
       NODE_ENV: production
       PORT: 3000
+      DATA_DIR: /app/data
       DB_HOST: db
       DB_PORT: 5432
       DB_NAME: ${DB_NAME}
@@ -37,6 +38,8 @@ services:
       JWT_SECRET: ${JWT_SECRET}
     ports:
       - "${BACKEND_PORT:-3238}:3000"
+    volumes:
+      - backend_data:/app/data
     depends_on:
       db:
         condition: service_healthy
@@ -60,3 +63,4 @@ services:
 
 volumes:
   db_data:
+  backend_data:

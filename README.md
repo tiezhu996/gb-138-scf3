@@ -25,6 +25,7 @@ docker compose down -v --remove-orphans
 
 - 临终关怀知识导航
 - 症状照护与心理支持信息
+- 可持续照护记录（症状、严重度、发生时间、观察说明，支持结案，重启不丢失）
 - 资源、愿望清单和家属指南
 
 ## 本地开发
@@ -56,7 +57,7 @@ docker compose up -d db
 | 层级 | 技术 |
 | --- | --- |
 | 前端 | React + Vite |
-| 后端 | Node.js health API |
+| 后端 | Node.js health API + 照护记录持久化（JSON 文件存储） |
 | 数据库 | PostgreSQL |
 | 部署 | Docker Compose + Nginx |
 
@@ -96,6 +97,8 @@ docker compose up -d db
 
 - `docker-compose.yml` 顶层已声明 `name: gb-138`，可以在中文目录名下直接运行。
 - 数据库使用 Docker 命名卷 `db_data` 持久化，不绑定到宿主中文路径。
+- 照护记录由后端写入命名卷 `backend_data`（容器内 `/app/data/care-records.json`），
+  服务重启或容器重建后记录仍在；本地开发时默认写入 `backend/data/`。
 - 前端容器使用 Nginx 托管静态资源，并将 `/api` 反向代理到后端服务名 `backend`。
 - 后端会等待数据库健康后再启动，前端会等待后端健康后再启动。
 - 如本机端口冲突，修改根目录 `.env` 中的 `FRONTEND_PORT`、`BACKEND_PORT` 或 `DB_PORT`。

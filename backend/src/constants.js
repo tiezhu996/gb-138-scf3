@@ -4,6 +4,19 @@ const project = {
   description: '提供临终关怀知识、症状照护、家属指导和资源清单的指南应用。',
 };
 
+// 与前端 src/data/symptoms.js 中的症状保持一致，家属只能选择已有症状
+const symptomOptions = [
+  { id: 'pain', title: '疼痛缓解', icon: '🩹' },
+  { id: 'breathing', title: '呼吸困难', icon: '💨' },
+  { id: 'nausea', title: '恶心呕吐', icon: '🤢' },
+  { id: 'fatigue', title: '疲劳乏力', icon: '😴' },
+  { id: 'constipation', title: '便秘困扰', icon: '🚽' },
+  { id: 'sleep', title: '睡眠障碍', icon: '🌙' },
+];
+
+const EMERGENCY_SEVERITY = 4;
+const EMERGENCY_SYMPTOM_ID = 'breathing';
+
 const messages = {
   health: `${project.name} backend is running`,
   notFound: 'Not found',
@@ -13,4 +26,7 @@ const messages = {
 module.exports = {
   project,
   messages,
+  symptomOptions,
+  EMERGENCY_SEVERITY,
+  EMERGENCY_SYMPTOM_ID,
 };

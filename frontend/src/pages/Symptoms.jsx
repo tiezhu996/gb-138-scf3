@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { symptomCategories } from '../data/symptoms';
+import CareRecords from '../components/CareRecords';
 
 const Symptoms = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -143,6 +144,8 @@ const Symptoms = () => {
             </div>
           </div>
         )}
+
+        <CareRecords />
       </main>
 
       <footer className="relative bg-gradient-to-r from-sky-800 to-blue-900 text-white/80 py-10 mt-20">
